@@ -335,9 +335,13 @@
                                 <div class="flex items-center gap-4 bg-blue-50 p-4 rounded-xl mb-4 border border-blue-100">
                                     <div class="bg-white p-2 rounded-lg shadow-sm shrink-0">
                                         <!-- QR Code -->
-                                        <div class="w-20 h-20 bg-gray-200 flex items-center justify-center text-gray-400 text-[10px] text-center rounded">
-                                            QR Code<br>Image
-                                        </div>
+<div class="w-20 h-20 bg-gray-200 flex items-center justify-center rounded overflow-hidden">
+  <img 
+    src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Example" 
+    alt="QR Code" 
+    class="w-full h-full object-cover"
+  >
+</div>
                                     </div>
                                     <div class="text-sm">
                                         <p class="font-bold text-blue-900">স্ক্যান করে পেমেন্ট করুন</p>
