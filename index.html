@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>রিষড়া বসন্ত উৎসব কমিটি বন ভোজন ২০২৬</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts for Bengali -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Custom Config for Tailwind colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#ea580c', // Orange 600
+                        secondary: '#c2410c', // Orange 700
+                        accent: '#ffedd5', // Orange 100
+                        bglight: '#fff7ed', // Orange 50
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans Bengali"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            background-color: #fff7ed;
+        }
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Gallery Image Hover Effect */
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 0.75rem; /* rounded-xl */
+            cursor: pointer;
+            position: relative;
+        }
+        .gallery-item img {
+            transition: transform 0.4s ease;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+        /* Fade animation for slider */
+        .fade-enter {
+            opacity: 0;
+        }
+        .fade-enter-active {
+            opacity: 1;
+            transition: opacity 500ms ease-in;
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-primary text-white shadow-lg sticky top-0 z-40 transition-all duration-300 backdrop-blur-md bg-opacity-95">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3">
+                <div class="bg-white p-1 rounded-full shadow-md w-10 h-10 md:w-12 md:h-12 flex items-center justify-center overflow-hidden border-2 border-orange-200">
+                    <img src="/logo.jpeg" alt="Logo" class="w-full h-full object-contain">
+                </div>
+                <div class="leading-tight">
+                    <h1 class="text-lg md:text-2xl font-bold">রিষড়া বসন্ত উৎসব</h1>
+                    <p class="text-xs text-orange-100 opacity-90 hidden md:block">বন ভোজন ২০২৬</p>
+                </div>
+            </div>
+            
+            <!-- Nav Buttons -->
+            <div class="flex gap-2">
+                <button onclick="showSection('home')" class="flex items-center gap-2 px-4 py-1.5 bg-white/20 hover:bg-white/30 rounded-full transition text-sm font-semibold border border-white/20">
+                    <i class="fas fa-home"></i> <span class="hidden md:inline">হোম</span>
+                </button>
+                <button onclick="showSection('admin')" class="flex items-center gap-2 px-4 py-1.5 bg-black/20 hover:bg-black/30 rounded-full transition text-sm font-semibold border border-white/10">
+                    <i class="fas fa-shield-alt"></i> <span class="hidden md:inline">অ্যাডমিন</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div id="app-container" class="container mx-auto p-4 md:p-6 flex-grow max-w-7xl">
+        
+        <!-- HOME SECTION -->
+        <div id="home-section" class="animate-fade-in space-y-8">
+            
+            <!-- 1. Hero Banner (Fixed: Added ID 'slider-img' for JS) -->
+            <div class="relative w-full h-64 md:h-[450px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white bg-gray-200">
+                <img id="slider-img" src="/banner.jpg" 
+                     class="w-full h-full object-cover transition-opacity duration-500" 
+                     alt="Picnic Banner">
+                
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6 md:p-10 pointer-events-none">
+                    <div class="text-white drop-shadow-lg">
+                        <span class="bg-orange-500 text-white text-[10px] md:text-xs font-bold px-3 py-1 rounded-full mb-2 inline-block uppercase tracking-wider shadow-lg">আসন্ন ইভেন্ট</span>
+                        <h2 class="text-3xl md:text-6xl font-bold mb-2 font-sans">বন ভোজন ২০২৬</h2>
+                        <p class="text-sm md:text-xl text-orange-100 max-w-2xl font-light">
+                            প্রকৃতির মাঝে একটি আনন্দমুখর দিন। আসুন সবাই মিলে আনন্দ করি।
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. Gallery Section -->
+            <section>
+                <div class="flex items-center mb-4 px-2">
+                    <div class="w-1.5 h-8 bg-primary rounded-full mr-3"></div>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800">পিকনিক স্পট গ্যালারি</h3>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                    <!-- Images 1 to 13 as requested -->
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/1.jpeg" alt="Spot 1">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/2.jpeg" alt="Spot 2">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/3.jpeg" alt="Spot 3">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/4.jpeg" alt="Spot 4">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/5.jpeg" alt="Spot 5">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/6.jpeg" alt="Spot 6">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/7.jpeg" alt="Spot 7">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/8.jpeg" alt="Spot 8">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/9.jpeg" alt="Spot 9">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/10.jpeg" alt="Spot 10">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/11.jpeg" alt="Spot 11">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/12.jpeg" alt="Spot 12">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                    <div class="gallery-item h-32 md:h-48 shadow-lg" onclick="openLightbox(this.querySelector('img').src)">
+                        <img src="/13.jpeg" alt="Spot 13">
+                        <div class="gallery-overlay"><i class="fas fa-search-plus text-white text-2xl"></i></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Content Grid -->
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left Column: Info & Menu (LG: 7 cols) -->
+                <div class="lg:col-span-7 space-y-8">
+                    
+                    <!-- Announcement Card -->
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border-t-4 border-primary relative overflow-hidden">
+                        <div class="absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 bg-orange-100 rounded-full blur-xl opacity-50"></div>
+                        
+                        <h3 class="text-xl font-bold text-secondary mb-4 flex items-center">
+                            <i class="fas fa-bullhorn mr-3 bg-orange-100 p-2 rounded-full"></i>বিশেষ ঘোষণা
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed mb-6 text-base md:text-lg">
+                            এবারের পিকনিক এর বিশেষ আকর্ষণ <span class="font-bold text-primary bg-orange-50 px-2 py-0.5 rounded">ক্রিকেট ম্যাচ</span> 🏏। 
+                            এছাড়াও বাচ্চা, মহিলা, পুরুষদের জন্য থাকছে বিভিন্ন খেলা ও আকর্ষণীয় পুরস্কার। 🎁
+                            <br><br>
+                            তাই সকলের কাছে বিনীত অনুরোধ, আপনারা ও আত্মীয় স্বজন বন্ধু বান্ধব মিলে দ্রুত নাম নথি ভুক্ত করুন।
+                        </p>
+
+                        <!-- Location Section -->
+                        <div class="mb-4 bg-green-50 p-4 rounded-xl text-green-900 border border-green-200 flex items-start gap-3">
+                            <i class="fas fa-map-marked-alt mt-1 text-green-600 text-lg"></i>
+                            <div>
+                                <strong>পিকনিক স্পট:</strong> Relax Picnic Spot (রিলাক্স পিকনিক স্পট)<br>
+                                <a href="https://www.google.com/maps/place/Relax+picnic+spot/@22.895691,88.3324332,17z/data=!3m1!4b1!4m6!3m5!1s0x39f891001766a755:0xd24269d844e4b767!8m2!3d22.895691!4d88.3324332!16s%2Fg%2F11wxbwgz8v?entry=ttu&g_ep=EgoyMDI1MTEyMy4xIKXMDSoASAFQAw%3D%3D" target="_blank" class="text-blue-600 underline text-sm hover:text-blue-800 font-semibold mt-1 inline-flex items-center gap-1">
+                                    <i class="fas fa-location-arrow"></i> গুগল ম্যাপে দেখুন
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="bg-accent/50 p-4 rounded-xl text-orange-900 border border-orange-200 flex items-start gap-3">
+                            <i class="fas fa-clock mt-1 text-primary"></i>
+                            <div>
+                                <strong>আসন সংখ্যা সীমিত!</strong><br>
+                                <span class="text-sm">এন্ট্রি টাইম: সকাল ৯টা থেকে বিকেল ৫টা।</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Menu Card -->
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
+                        <div class="bg-primary px-6 py-4 flex justify-between items-center">
+                            <h3 class="text-xl font-bold text-white flex items-center">
+                                <i class="fas fa-utensils mr-3"></i> খাবারের মেনু
+                            </h3>
+                            <span class="bg-white/20 text-white text-xs px-3 py-1 rounded-full"> বুফে সিস্টেম </span>
+                        </div>
+                        
+                        <div class="p-6 md:p-8">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-3 gap-x-8 text-gray-700">
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs mr-3 font-bold border border-green-200">১</span> কড়াই শুটির কঁচুরি (4pc)</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-green-100 text-green-700 flex items-center justify-center text-xs mr-3 font-bold border border-green-200">২</span> ছোটো আলুরদম</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs mr-3 font-bold border border-red-200">৩</span> চিকেন পাকোড়া (4pc)</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-xs mr-3 font-bold border border-amber-200">৪</span> কফি</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-gray-100 text-gray-700 flex items-center justify-center text-xs mr-3 font-bold border border-gray-200">৫</span> সাদা ভাত</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center text-xs mr-3 font-bold border border-yellow-200">৬</span> মুগডাল</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center text-xs mr-3 font-bold border border-yellow-200">৭</span> ঝুড়ি আলুভাজা</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-red-100 text-red-700 flex items-center justify-center text-xs mr-3 font-bold border border-red-200">৮</span> চিকেন কারী / পনির</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center text-xs mr-3 font-bold border border-pink-200">৯</span> চাটনী</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-yellow-100 text-yellow-700 flex items-center justify-center text-xs mr-3 font-bold border border-yellow-200">১০</span> পাঁপড়</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-pink-100 text-pink-700 flex items-center justify-center text-xs mr-3 font-bold border border-pink-200">১১</span> মিস্টি</div>
+                                <div class="flex items-center p-2 hover:bg-orange-50 rounded transition"><span class="w-6 h-6 rounded-full bg-orange-100 text-orange-700 flex items-center justify-center text-xs mr-3 font-bold border border-orange-200">১২</span> কমলা লেবু</div>
+                            </div>
+
+                            <div class="mt-8 pt-6 border-t border-dashed border-gray-300">
+                                <h4 class="font-bold text-gray-800 mb-3 flex items-center text-sm uppercase tracking-wide">
+                                    <i class="far fa-clock mr-2 text-primary"></i>সময়সূচী
+                                </h4>
+                                <div class="flex flex-col md:flex-row gap-4 text-sm text-gray-600">
+                                    <div class="bg-gray-50 px-4 py-2 rounded border border-gray-100 flex-1">
+                                        <span class="font-bold text-gray-800">টিফিন:</span> সকাল ১১ টা পর্যন্ত
+                                    </div>
+                                    <div class="bg-gray-50 px-4 py-2 rounded border border-gray-100 flex-1">
+                                        <span class="font-bold text-gray-800">স্ন্যাকস:</span> ১১:৩০ টার মধ্যে
+                                    </div>
+                                </div>
+                                <p class="text-xs text-gray-400 mt-4 italic text-center">বিঃ দ্রঃ কর্তৃপক্ষের নির্দেশে মেনু বা ভেনু পরিবর্তন হতে পারে।</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Registration Form (LG: 5 cols) -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-6 md:p-8 rounded-2xl shadow-xl border-t-4 border-green-600">
+                        <div class="text-center mb-6">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3 text-green-600 text-xl">
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800">নাম নথি ভুক্ত করুন</h3>
+                            <p class="text-gray-500 text-sm mt-1">দয়া করে সঠিক তথ্য প্রদান করুন</p>
+                        </div>
+                        
+                        <form id="bookingForm" onsubmit="submitBooking(event)" class="space-y-4">
+                            <!-- Primary Contact -->
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-1.5 text-sm">পরিবারের প্রধানের নাম</label>
+                                <div class="relative">
+                                    <i class="fas fa-user absolute left-3 top-3 text-gray-400 text-sm"></i>
+                                    <input type="text" id="mainName" required placeholder="নাম লিখুন" 
+                                        class="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50 transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-bold mb-1.5 text-sm">মোবাইল নম্বর</label>
+                                <div class="relative">
+                                    <i class="fas fa-phone absolute left-3 top-3 text-gray-400 text-sm"></i>
+                                    <input type="tel" id="mainPhone" required placeholder="10 সংখ্যার মোবাইল নম্বর" pattern="[0-9]{10}"
+                                        class="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50 transition">
+                                </div>
+                            </div>
+
+                            <!-- Members List -->
+                            <div class="bg-gray-50 p-4 rounded-xl border border-gray-200">
+                                <div class="flex justify-between items-center mb-3">
+                                    <label class="text-gray-700 font-bold text-sm">সদস্য তালিকা</label>
+                                    <span class="text-xs text-gray-500 bg-white px-2 py-0.5 rounded border">খাবার নির্বাচন করুন</span>
+                                </div>
+                                <div id="membersContainer" class="space-y-3 mb-3">
+                                    <!-- Dynamic members will appear here -->
+                                </div>
+                                
+                                <button type="button" onclick="addMemberField()" 
+                                    class="w-full py-2 border-2 border-dashed border-green-500 text-green-600 rounded-lg hover:bg-green-50 font-semibold transition text-sm flex items-center justify-center gap-2">
+                                    <i class="fas fa-plus-circle"></i> আর এক জন যোগ করুন
+                                </button>
+                            </div>
+
+                            <!-- Payment Section -->
+                            <div class="pt-4 border-t">
+                                <h4 class="font-bold text-gray-800 mb-4 flex items-center text-sm uppercase">
+                                    <i class="fas fa-qrcode text-blue-600 mr-2"></i> পেমেন্ট
+                                </h4>
+                                
+                                <div class="flex items-center gap-4 bg-blue-50 p-4 rounded-xl mb-4 border border-blue-100">
+                                    <div class="bg-white p-2 rounded-lg shadow-sm shrink-0">
+                                        <!-- QR Code -->
+                                        <div class="w-20 h-20 bg-gray-200 flex items-center justify-center text-gray-400 text-[10px] text-center rounded">
+                                            QR Code<br>Image
+                                        </div>
+                                    </div>
+                                    <div class="text-sm">
+                                        <p class="font-bold text-blue-900">স্ক্যান করে পেমেন্ট করুন</p>
+                                        <p class="text-blue-700 text-xs mt-1">PhonePe / GPay / Paytm</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 font-bold mb-1.5 text-sm">Transaction ID</label>
+                                    <input type="text" id="txnId" required placeholder="UTR / Transaction ID দিন" 
+                                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-50 text-sm">
+                                </div>
+                            </div>
+
+                            <!-- Submit Button - Made more prominent -->
+                            <div class="pt-2 sticky bottom-0 bg-white pb-2 md:relative md:bg-transparent md:pb-0">
+                                <button type="submit" id="submitBtn"
+                                    class="w-full bg-gradient-to-r from-green-600 to-green-700 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl hover:from-green-700 hover:to-green-800 transform hover:-translate-y-0.5 transition duration-200 flex justify-center items-center text-lg uppercase tracking-wide border-b-4 border-green-800">
+                                    বুকিং কনফার্ম করুন
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ADMIN SECTION -->
+        <div id="admin-section" class="hidden animate-fade-in">
+            <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 mb-6 border-t-4 border-gray-800">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b pb-4 gap-4">
+                    <div>
+                        <h2 class="text-2xl font-bold text-gray-800">অ্যাডমিন ড্যাশবোর্ড</h2>
+                        <p class="text-sm text-gray-500">সকল রেজিস্ট্রেশনের তালিকা</p>
+                    </div>
+                    <div class="flex gap-3 text-sm flex-wrap">
+                        <div class="bg-green-100 text-green-800 px-4 py-2 rounded-lg border border-green-200">
+                            মোট বুকিং: <span id="totalBookings" class="font-bold text-lg ml-1">0</span>
+                        </div>
+                        <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg border border-blue-200">
+                            মোট মানুষ: <span id="totalPeople" class="font-bold text-lg ml-1">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto rounded-lg border border-gray-200">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-50 text-gray-600 text-xs uppercase tracking-wider">
+                                <th class="p-4 border-b font-bold">নাম ও ফোন</th>
+                                <th class="p-4 border-b font-bold">সদস্য বিবরণ</th>
+                                <th class="p-4 border-b font-bold text-center">মোট</th>
+                                <th class="p-4 border-b font-bold">পেমেন্ট ID</th>
+                                <th class="p-4 border-b font-bold text-right">সময়</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminTableBody" class="text-sm divide-y divide-gray-100 bg-white">
+                            <tr>
+                                <td colspan="5" class="p-8 text-center text-gray-500 italic">ডাটা লোড হচ্ছে...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer with Phone Number -->
+    <footer class="bg-gray-900 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-xl font-bold mb-4">রিষড়া বসন্ত উৎসব কমিটি</h2>
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 text-gray-300 mb-6">
+                <a href="tel:9432651107" class="flex items-center gap-2 hover:text-orange-500 transition px-4 py-2 bg-gray-800 rounded-full">
+                    <i class="fas fa-phone-alt text-green-500"></i> 9432651107
+                </a>
+                <a href="tel:9038816812" class="flex items-center gap-2 hover:text-orange-500 transition px-4 py-2 bg-gray-800 rounded-full">
+                    <i class="fas fa-phone-alt text-green-500"></i> 9038816812
+                </a>
+            </div>
+            <p class="text-sm text-gray-500">© ২০২৬ সর্বস্বত্ব সংরক্ষিত</p>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black/60 hidden items-center justify-center z-[60] backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl p-8 max-w-sm w-full text-center shadow-2xl transform transition-all scale-100 animate-fade-in relative">
+            <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5 shadow-inner">
+                <i class="fas fa-check text-3xl text-green-600"></i>
+            </div>
+            <h3 class="text-2xl font-bold text-gray-800 mb-2">ধন্যবাদ!</h3>
+            <p class="text-gray-600 mb-8 leading-relaxed">আপনার বুকিং সফলভাবে জমা দেওয়া হয়েছে।<br>আমরা শীঘ্রই যোগাযোগ করব।</p>
+            <button onclick="document.getElementById('successModal').style.display='none'" class="bg-green-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-green-700 w-full shadow-lg hover:shadow-green-500/30 transition">ঠিক আছে</button>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div id="lightbox" class="fixed inset-0 bg-black/95 hidden items-center justify-center z-[70] p-4 backdrop-blur-md" onclick="closeLightbox()">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition focus:outline-none">&times;</button>
+        <img id="lightbox-img" src="" alt="Full Screen" class="max-w-full max-h-[90vh] rounded-lg shadow-2xl transform scale-95 transition duration-300" onclick="event.stopPropagation()">
+    </div>
+
+    <!-- Firebase Scripts -->
+<script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, Timestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Global Variable for App ID (Used for database path)
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        
+        // --- PASTE YOUR CODE HERE (Replace the old JSON.parse line) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyAU-Ct_UsjFqKG5QhOLMBTixjucQj6y1YE",
+            authDomain: "picnic-790a1.firebaseapp.com",
+            projectId: "picnic-790a1",
+            storageBucket: "picnic-790a1.firebasestorage.app",
+            messagingSenderId: "731528892970",
+            appId: "1:731528892970:web:8a783397b0be68e11da953"
+        };
+        // -------------------------------------------------------------
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        // ... rest of the code remains the same ...
+        let currentUser = null;
+
+        // Auth Logic with Safety Check
+        async function initAuth() {
+            try {
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+            } catch (error) {
+                console.error("Auth Error (Safe to ignore if Read-Only):", error);
+                // Don't block the app
+            }
+        }
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                currentUser = user;
+                console.log("User authenticated:", user.uid);
+                initAdminListener();
+            }
+        });
+
+        initAuth();
+
+        // --- Logic: Slider ---
+        // Using local paths for banner/images now as requested, though logic is prepared for rotation
+        const sliderImages = [
+            "/banner.jpg",
+            "/1.jpeg",
+            "/2.jpeg"
+        ];
+        let currentSlide = 0;
+        
+        window.changeSlide = function(direction) {
+            const img = document.getElementById('slider-img');
+            
+            // Safety Check: If image element is missing, stop execution
+            if (!img) return;
+
+            img.style.opacity = '0'; // Fade out
+            
+            setTimeout(() => {
+                if (direction === 1) {
+                    currentSlide = (currentSlide + 1) % sliderImages.length;
+                } else {
+                    currentSlide = (currentSlide - 1 + sliderImages.length) % sliderImages.length;
+                }
+                
+                // Double check before setting src
+                const currentImg = document.getElementById('slider-img');
+                if (currentImg) {
+                    currentImg.src = sliderImages[currentSlide];
+                    currentImg.onload = () => { currentImg.style.opacity = '1'; }; // Fade in
+                }
+            }, 300);
+        };
+        
+        // Auto slide
+        setInterval(() => window.changeSlide(1), 5000);
+
+        // --- Logic: Add Member Fields ---
+        window.addMemberField = function(isFirst = false) {
+            const container = document.getElementById('membersContainer');
+            const id = Date.now();
+            
+            const div = document.createElement('div');
+            div.className = "flex flex-col sm:flex-row gap-2 items-start sm:items-center bg-white p-3 rounded-lg border border-gray-200 shadow-sm animate-fade-in";
+            div.innerHTML = `
+                <div class="flex-grow w-full">
+                    <input type="text" name="memberName" placeholder="সদস্যের নাম" required 
+                        class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-green-500 text-sm bg-gray-50">
+                </div>
+                <div class="flex items-center justify-between w-full sm:w-auto gap-4 mt-2 sm:mt-0">
+                    <div class="flex gap-3 text-sm bg-gray-50 p-1.5 rounded border border-gray-200">
+                        <label class="flex items-center cursor-pointer hover:text-green-700">
+                            <input type="radio" name="foodType_${id}" value="Chicken" checked class="mr-1.5 accent-green-600">
+                            <span>চিকেন</span>
+                        </label>
+                        <div class="w-px h-4 bg-gray-300"></div>
+                        <label class="flex items-center cursor-pointer hover:text-green-700">
+                            <input type="radio" name="foodType_${id}" value="Paneer" class="mr-1.5 accent-green-600">
+                            <span>পনির</span>
+                        </label>
+                    </div>
+                    ${!isFirst ? `<button type="button" onclick="this.parentElement.parentElement.remove()" class="text-red-400 hover:text-red-600 p-1.5 rounded-full hover:bg-red-50 transition"><i class="fas fa-trash-alt"></i></button>` : '<div class="w-8"></div>'}
+                </div>
+            `;
+            container.appendChild(div);
+        };
+
+        // Add the first member field by default
+        addMemberField(true);
+
+        // --- Logic: Submit Form ---
+        window.submitBooking = async function(e) {
+            e.preventDefault();
+            
+            if (!currentUser) {
+                // If auth failed, try to proceed anyway. 
+                console.warn("User not authenticated. Attempting save anyway...");
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> অপেক্ষা করুন...';
+
+            // Gather Data
+            const mainName = document.getElementById('mainName').value;
+            const mainPhone = document.getElementById('mainPhone').value;
+            const txnId = document.getElementById('txnId').value;
+            
+            const memberDivs = document.getElementById('membersContainer').children;
+            const members = [];
+            
+            for (let div of memberDivs) {
+                const nameInput = div.querySelector('input[name="memberName"]');
+                const foodTypeInput = div.querySelector('input[type="radio"]:checked');
+                if (nameInput && nameInput.value.trim() !== "") {
+                    members.push({
+                        name: nameInput.value.trim(),
+                        food: foodTypeInput.value
+                    });
+                }
+            }
+
+            if (members.length === 0) {
+                alert("অন্তত একজন সদস্যের নাম দিন।");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+                return;
+            }
+
+            try {
+                // Save to Public Data
+                await addDoc(collection(db, 'artifacts', appId, 'public', 'data', 'picnic_registrations'), {
+                    mainName: mainName,
+                    phone: mainPhone,
+                    txnId: txnId,
+                    members: members,
+                    totalCount: members.length,
+                    createdAt: Timestamp.now()
+                });
+
+                // Show Success
+                document.getElementById('bookingForm').reset();
+                document.getElementById('membersContainer').innerHTML = ''; 
+                addMemberField(true); 
+                document.getElementById('successModal').style.display = 'flex';
+                
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("দুঃখিত, কোনো সমস্যা হয়েছে বা সার্ভার সংযোগ নেই।");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        };
+
+        // --- Logic: Admin & Navigation ---
+        window.showSection = function(section) {
+            if (section === 'admin') {
+                document.getElementById('home-section').classList.add('hidden');
+                document.getElementById('admin-section').classList.remove('hidden');
+                window.location.hash = 'admin';
+                initAdminListener();
+            } else {
+                document.getElementById('admin-section').classList.add('hidden');
+                document.getElementById('home-section').classList.remove('hidden');
+                window.location.hash = '';
+            }
+        };
+
+        if (window.location.hash === '#admin') {
+            showSection('admin');
+        }
+
+        let unsubscribeAdmin = null;
+
+        function initAdminListener() {
+            // Check auth before listening
+            if (!currentUser && !auth.currentUser) return; 
+
+            if (document.getElementById('admin-section').classList.contains('hidden') || unsubscribeAdmin) return;
+
+            const q = query(collection(db, 'artifacts', appId, 'public', 'data', 'picnic_registrations'), orderBy('createdAt', 'desc'));
+            
+            unsubscribeAdmin = onSnapshot(q, (snapshot) => {
+                const tbody = document.getElementById('adminTableBody');
+                let totalBookings = 0;
+                let totalPeople = 0;
+                let html = '';
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    totalBookings++;
+                    totalPeople += (data.totalCount || 0);
+
+                    const membersHtml = data.members.map(m => 
+                        `<span class="inline-flex items-center bg-gray-100 rounded px-2 py-1 text-xs mr-1 mb-1 border border-gray-200">
+                            ${m.name} <span class="${m.food === 'Chicken' ? 'text-red-600' : 'text-green-600'} font-bold ml-1">(${m.food === 'Chicken' ? 'C' : 'P'})</span>
+                        </span>`
+                    ).join('');
+
+                    const date = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleString('bn-BD') : '';
+
+                    html += `
+                        <tr class="border-b hover:bg-gray-50 transition last:border-0">
+                            <td class="p-4 align-top">
+                                <div class="font-bold text-gray-800">${data.mainName}</div>
+                                <div class="text-xs text-gray-500 mt-1 font-mono bg-gray-100 inline-block px-1 rounded"><i class="fas fa-phone mr-1"></i>${data.phone}</div>
+                            </td>
+                            <td class="p-4 align-top">${membersHtml}</td>
+                            <td class="p-4 text-center font-bold text-blue-600 align-top text-lg">${data.totalCount}</td>
+                            <td class="p-4 align-top font-mono text-xs text-gray-600"><span class="bg-yellow-50 px-2 py-1 rounded border border-yellow-100 text-yellow-800">${data.txnId}</span></td>
+                            <td class="p-4 text-right text-xs text-gray-400 align-top whitespace-nowrap">${date}</td>
+                        </tr>
+                    `;
+                });
+
+                if (html === '') {
+                    html = '<tr><td colspan="5" class="p-8 text-center text-gray-400">এখনও কোনো বুকিং নেই।</td></tr>';
+                }
+
+                tbody.innerHTML = html;
+                document.getElementById('totalBookings').innerText = totalBookings;
+                document.getElementById('totalPeople').innerText = totalPeople;
+            }, (error) => {
+                console.error("Admin Fetch Error:", error);
+                document.getElementById('adminTableBody').innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-500">ডাটা লোড করতে সমস্যা হয়েছে।</td></tr>`;
+            });
+        }
+
+        // --- Lightbox Logic ---
+        window.openLightbox = function(src) {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.src = src;
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            setTimeout(() => {
+                img.classList.remove('scale-95');
+                img.classList.add('scale-100');
+            }, 10);
+        }
+
+        window.closeLightbox = function() {
+            const lightbox = document.getElementById('lightbox');
+            const img = document.getElementById('lightbox-img');
+            img.classList.remove('scale-100');
+            img.classList.add('scale-95');
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                img.src = '';
+            }, 200);
+        }
+
+    </script>
+</body>
+</html>
